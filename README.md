@@ -35,12 +35,6 @@ This project provides an end-to-end pipeline for emotion classification, includi
 pip install -r requirements.txt
 ```
 
-If using Google Drive:
-
-```bash
-pip install gdown python-dotenv
-```
-
 ---
 
 ### 2. Environment Variables (Optional)
