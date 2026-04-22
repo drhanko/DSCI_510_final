@@ -52,7 +52,7 @@ GOOGLE_DRIVE_FOLDER_ID="Will assign by the owner"
 ```
 
 ---
-default dataset_link = ["dailydialog","empathetics","go_emotions","mixed_data"]
+default dataset_link = ["dailydialog","empathetics","go_emotions","mixed_data"]  # choose 1 to go
 
 ## 🚀 Usage
 
