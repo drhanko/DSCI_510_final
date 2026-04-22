@@ -252,8 +252,6 @@ def evaluation(mode ,SPECIFIC_DATASET):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("device:", device)
 
-    raise ValueError("nnononon")
-
     tokenizer = AutoTokenizer.from_pretrained(MODEL_DIRS[0], local_files_only=True)
 
     models = []
