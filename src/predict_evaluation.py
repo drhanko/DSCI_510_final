@@ -128,7 +128,8 @@ def plot_multiclass_roc(y_true, y_prob, class_names, SAVE_PATH=None):
     plt.show()
     return auc_macro
 
-def plot_precision_recall_bars(y_true, y_pred, class_names, title, SAVE_PATH=None):
+
+def plot_precision_recall_bars(y_true, y_pred, class_names, title, save_path=None):
     precision, recall, _, support = precision_recall_fscore_support(
         y_true,
         y_pred,
@@ -140,8 +141,9 @@ def plot_precision_recall_bars(y_true, y_pred, class_names, title, SAVE_PATH=Non
     width = 0.35
 
     plt.figure(figsize=(8, 5))
-    plt.bar(x - width / 2, precision, width, label="Precision")
-    plt.bar(x + width / 2, recall, width, label="Recall")
+
+    bars1 = plt.bar(x - width / 2, precision, width, label="Precision")
+    bars2 = plt.bar(x + width / 2, recall, width, label="Recall")
 
     plt.xticks(x, class_names)
     plt.ylim(0, 1.05)
@@ -151,9 +153,21 @@ def plot_precision_recall_bars(y_true, y_pred, class_names, title, SAVE_PATH=Non
     plt.grid(axis="y", alpha=0.3)
     plt.tight_layout()
 
-    if SAVE_PATH is not None:
-        plt.savefig(SAVE_PATH, dpi=200, bbox_inches="tight")
-        print(f"Precision/Recall figure saved to: {SAVE_PATH}")
+    for bars in [bars1, bars2]:
+        for bar in bars:
+            height = bar.get_height()
+            plt.text(
+                bar.get_x() + bar.get_width() / 2,
+                height + 0.02,
+                f"{height:.2f}",
+                ha='center',
+                va='bottom',
+                fontsize=10
+            )
+
+    if save_path is not None:
+        plt.savefig(save_path, dpi=200, bbox_inches="tight")
+        print(f"Precision/Recall figure saved to: {save_path}")
 
     plt.show()
 
@@ -163,28 +177,28 @@ def plot_precision_recall_bars(y_true, y_pred, class_names, title, SAVE_PATH=Non
 
 
 def plot_f1_acc_auc_metrics(metrics_dict, title, save_path=None):
-
-    datasets = list(metrics_dict.keys())
-
     acc = metrics_dict["accuracy"]
-    f1  = metrics_dict["f1_macro"]
+    f1 = metrics_dict["f1_macro"]
     auc = metrics_dict["auc"]
 
-    y = np.arange(len(datasets))
-    height = 0.25
+    plt.figure(figsize=(6, 4))
 
-    plt.figure(figsize=(8,6))
+    labels = ["Accuracy", "F1 Score", "AUC"]
+    values = [acc, f1, auc]
 
-    plt.barh(y - height, acc, height, label="Accuracy")
-    plt.barh(y,          f1,  height, label="Macro-F1")
-    plt.barh(y + height, auc, height, label="AUC")
+    bars = plt.barh(labels, values)
 
-    plt.yticks(y, datasets)
     plt.xlim(0, 1)
     plt.xlabel("Score")
     plt.title(title)
-    plt.legend()
-    plt.grid(axis="x", alpha=0.3)
+
+    for bar, v in zip(bars, values):
+        plt.text(
+            v + 0.01,
+            bar.get_y() + bar.get_height() / 2,
+            f"{v:.2f}",
+            va="center"
+        )
 
     plt.tight_layout()
 
@@ -230,7 +244,6 @@ def evaluation(mode ,SPECIFIC_DATASET):
 
         print(MODEL_DIRS,VAL_PATH,TEST_PATH)
 
-    raise ValueError("Invalid mode")
     val_data = load_jsonl_for_evaluation(VAL_PATH)
     test_data = load_jsonl_for_evaluation(TEST_PATH)
 
