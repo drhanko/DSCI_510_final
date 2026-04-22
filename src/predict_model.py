@@ -229,8 +229,7 @@ def execute_model_training(SPECIFIC_DATASET):
     print("cuda available:", torch.cuda.is_available())
     if torch.cuda.is_available():
         print("gpu:", torch.cuda.get_device_name(0))
-    else:
-        raise ValueError("cuda is not available. Please use ")
+
     print("model:", MODEL_NAME)
 
     train_rows = load_jsonl_for_model(TRAIN_PATH)

@@ -214,8 +214,8 @@ def evaluation(mode ,SPECIFIC_DATASET):
             f"{RESULTS_DIR}/seed_44/best_model",
         ]
 
-        VAL_PATH = f"{SPLIT_DATA_DIR}/{SPECIFIC_DATASET}/splits/validation.jsonl"
-        TEST_PATH = f"{SPLIT_DATA_DIR}/{SPECIFIC_DATASET}/splits/test.jsonl"
+        VAL_PATH = f"{SPLIT_DATA_DIR}/{SPECIFIC_DATASET}/split/validation.jsonl"
+        TEST_PATH = f"{SPLIT_DATA_DIR}/{SPECIFIC_DATASET}/split/test.jsonl"
 
         print(MODEL_DIRS, VAL_PATH, TEST_PATH)
 
@@ -223,8 +223,9 @@ def evaluation(mode ,SPECIFIC_DATASET):
 
         load_dotenv()  # 讀 .env
 
-        folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID")
-
+        # folder_id = os.getenv("GOOGLE_DRIVE_FOLDER_ID")
+        #I put GOOGLE_DRIVE_FOLDER_ID in config.py instead of .env in order to pass the final. After the final I will use .env instead of config.py
+        folder_id = GOOGLE_DRIVE_FOLDER_ID
         url = f"https://drive.google.com/drive/folders/{folder_id}"
         print("[INFO] Downloading folder...")
         gdown.download_folder(url, output=RESULTS_DIR, quiet=False, use_cookies=False)
@@ -250,6 +251,8 @@ def evaluation(mode ,SPECIFIC_DATASET):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("device:", device)
+
+    raise ValueError("nnononon")
 
     tokenizer = AutoTokenizer.from_pretrained(MODEL_DIRS[0], local_files_only=True)
 

@@ -52,7 +52,7 @@ GOOGLE_DRIVE_FOLDER_ID="Will assign by the owner"
 ```
 
 ---
-default dataset_link = ["dailydialog","empathetics","go_emotions","mixed_data"]  # choose 1 to go
+default dataset_link = ["dailydialog","empathetic","goemotions","mixed"]  # choose 1 to go
 
 ## 🚀 Usage
 
@@ -68,6 +68,7 @@ Train the model using prepared dataset:
 
 python main.py train dataset_link<dataset_link>
 
+Caution : You have to use cuda to run otherwise it will be very slow 
 
 ---
 
@@ -77,11 +78,15 @@ Evaluate the trained model.
 
 #### ✔ Local model
 
-python main.py eval --switch local
+python main.py eval --switch local --dataset_link <dataset_link>
 
 
 #### ✔ Google Drive model / dataset
 python main.py eval --switch google --dataset_link <dataset_link>
+
+
+# Caution : put GOOGLE_DRIVE_FOLDER_ID in config.py instead of .env in order to pass the final. After the final I will use .env instead of config.py
+
 
 
 ---

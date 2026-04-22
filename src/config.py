@@ -11,6 +11,9 @@ DATA_DIR = "../data"
 SPLIT_DATA_DIR = "../data/clean_data"
 DAILYDIALOG_DIR="../data/dailydialog"
 RESULTS_DIR = "../results"
+
+# I put GOOGLE_DRIVE_FOLDER_ID in config.py instead of .env in order to pass the final. After the final I will use .env instead of config.py
+GOOGLE_DRIVE_FOLDER_ID= "1-lOi108h0d-qtnNML3PddIV6Pa_p-EN7"
 # data sources configuration
 EMPATHETIC_URL = "empathetic_dialogues"
 DAILYDIALOG_URL = "thedevastator/dailydialog-unlock-the-conversation-potential-in"
@@ -22,7 +25,6 @@ GOEMOTIONS_URL = "go_emotions"
 OUTPUT_LABELS = ["negative", "neutral", "positive"]
 
 #Model config
-SPECIFIC_DATASET = "dailydialog"
 MODEL = "roberta-base"
 SEEDS_SETS = [42, 43, 44]
 MAX_LENGTH_c = 160
