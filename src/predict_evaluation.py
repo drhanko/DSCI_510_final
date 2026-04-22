@@ -202,10 +202,6 @@ def plot_f1_acc_auc_metrics(metrics_dict, title, save_path=None):
 
     plt.tight_layout()
 
-    if save_path:
-        plt.savefig(save_path, dpi=200, bbox_inches="tight")
-        print(f"Saved to {save_path}")
-
     plt.show()
 
 def evaluation(mode ,SPECIFIC_DATASET):
